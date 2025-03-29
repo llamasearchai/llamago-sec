@@ -1,0 +1,51 @@
+# LlamaSec Configuration File
+# This file contains the default configuration for LlamaSec
+
+# Number of concurrent requests
+concurrency: 10
+
+# HTTP request timeout in seconds
+timeout: 30s
+
+# Path to vulnerability signatures file
+signatureDBPath: "config/signatures.yaml"
+
+# Output format (markdown, json, csv)
+outputFormat: "markdown"
+
+# Output file path
+outputFile: "llamasec_report.md"
+
+# User-Agent string for HTTP requests
+userAgent: "LlamaSec/1.0.0 (+https://github.com/yourusername/llamasec)"
+
+# Rate limit in requests per second
+rateLimit: 5.0
+
+# Proxy URL (leave empty for no proxy)
+proxyURL: ""
+
+# Custom headers to send with each request
+customHeaders:
+  - name: "Accept"
+    value: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+  - name: "Accept-Language"
+    value: "en-US,en;q=0.5"
+
+# Whether to respect robots.txt
+respectRobotsTxt: true
+
+# Number of retries for failed requests
+retryCount: 3
+
+# Exponential backoff factor for retries
+retryBackoffFactor: 2.0
+
+# Log file path
+logFile: "llamasec.log"
+
+# Enable verbose output
+verboseOutput: false
+
+# WebAssembly plugin path (leave empty for no plugin)
+wasmPluginPath: "" 

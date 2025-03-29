@@ -1,0 +1,150 @@
+# LlamaSec Default Vulnerability Signatures
+- id: "XSS-001"
+  name: "Cross-Site Scripting (Reflected)"
+  description: "Detects potential reflected XSS vulnerabilities"
+  severity: "high"
+  patterns:
+    - "<script[^>]*>.*?</script>"
+    - "javascript:.*?\\("
+    - "on(load|click|mouseover|focus|blur)\\s*=\\s*[\"']"
+
+- id: "INFO-001"
+  name: "Information Disclosure"
+  description: "Detects potential information disclosure in HTTP headers"
+  severity: "medium"
+  headers:
+    - "X-Powered-By"
+    - "Server"
+    - "X-AspNet-Version"
+    - "X-Runtime"
+
+- id: "SEC-001"
+  name: "Missing Security Headers"
+  description: "Detects missing important security headers"
+  severity: "medium"
+  headers:
+    - "Content-Security-Policy"
+    - "X-Frame-Options"
+    - "X-XSS-Protection"
+    - "Strict-Transport-Security"
+
+- id: "API-001"
+  name: "API Key Exposure"
+  description: "Detects potential exposure of API keys or tokens"
+  severity: "high"
+  patterns:
+    - "api[_-]?key[\"']?\\s*[=:]\\s*[\"'][a-zA-Z0-9_\\-]{20,}[\"']"
+    - "access[_-]?token[\"']?\\s*[=:]\\s*[\"'][a-zA-Z0-9_\\-]{20,}[\"']"
+    - "secret[_-]?key[\"']?\\s*[=:]\\s*[\"'][a-zA-Z0-9_\\-]{20,}[\"']"
+
+- id: "SQL-001"
+  name: "SQL Injection"
+  description: "Detects potential SQL injection attack vectors"
+  severity: "high"
+  patterns:
+    - "\\b(union|select|insert|update|delete|drop|alter)\\b.*?\\b(from|into|where)\\b"
+    - "';\\s*--"
+    - "\"';\\s*or\\s*'1'='1"
+    - "';\\s*or\\s*1=1"
+
+- id: "DIR-001"
+  name: "Directory Listing"
+  description: "Detects directory listing enabled on the server"
+  severity: "medium"
+  patterns:
+    - "<title>Index of /"
+    - "<h1>Index of /"
+    - "Directory Listing for /"
+
+- id: "DEBUG-001"
+  name: "Debug Information Exposure"
+  description: "Debug information is exposed, potentially revealing sensitive data"
+  severity: "medium"
+  patterns:
+    - "stack trace:"
+    - "debug mode: (true|on|enabled)"
+    - "exception details:"
+    - "error(:|;|=)"
+
+- id: "OUTDATED-001"
+  name: "Outdated Software"
+  description: "Detects outdated software versions with known vulnerabilities"
+  severity: "high"
+  patterns:
+    - "jquery[.-]?1\\.[0-9]\\.[0-9]"
+    - "bootstrap[.-]?2\\.[0-9]\\.[0-9]"
+    - "php/[0-5]\\.[0-9]\\.[0-9]"
+    - "apache/[0-1]\\.[0-9]\\.[0-9]"
+
+- id: "VULN-004"
+  name: "Outdated Software Version"
+  description: "Detected outdated software versions"
+  severity: "medium"
+  patterns:
+    - "(?i)wordpress\\s+version\\s+[0-4]\\.[0-9]"
+    - "(?i)jquery\\s+v?1\\.[0-9]"
+    - "(?i)php\\s+version\\s+[4-5]"
+    - "(?i)apache\\s+[0-1]\\.[0-9]"
+  headers:
+    - "Server"
+    - "X-Powered-By"
+
+- id: "VULN-005"
+  name: "Information Disclosure"
+  description: "Server reveals sensitive information"
+  severity: "low"
+  headers:
+    - "Server"
+    - "X-Powered-By"
+    - "X-AspNet-Version"
+    - "X-Generator"
+
+- id: "VULN-006"
+  name: "Missing Security Headers"
+  description: "Important security headers are missing"
+  severity: "low"
+  headers:
+    - "Strict-Transport-Security"
+    - "Content-Security-Policy"
+    - "X-Content-Type-Options"
+    - "X-Frame-Options"
+    - "X-XSS-Protection"
+
+- id: "VULN-007"
+  name: "Directory Listing Enabled"
+  description: "Server directory listing is enabled"
+  severity: "medium"
+  patterns:
+    - "<title>Index of /"
+    - "<h1>Index of /"
+    - "Directory Listing for"
+
+- id: "VULN-008"
+  name: "Debug Information Disclosure"
+  description: "Debug information is exposed"
+  severity: "medium"
+  patterns:
+    - "(?i)stack trace:"
+    - "(?i)debug mode: (true|on|enabled)"
+    - "(?i)exception details:"
+    - "(?i)error(:|;|=)"
+
+- id: "VULN-009"
+  name: "WASM Code Execution"
+  description: "WebAssembly code execution capability detected"
+  severity: "high"
+  patterns:
+    - "new WebAssembly\\.Instance"
+    - "WebAssembly\\.instantiate"
+    - "WebAssembly\\.compile"
+
+- id: "VULN-010"
+  name: "Content Security Policy Issues"
+  description: "Potentially unsafe Content Security Policy directives"
+  severity: "medium"
+  patterns:
+    - "script-src[^;]*unsafe-inline"
+    - "script-src[^;]*unsafe-eval"
+    - "style-src[^;]*unsafe-inline"
+  headers:
+    - "Content-Security-Policy" 

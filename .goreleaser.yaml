@@ -1,0 +1,105 @@
+project_name: llamasec
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - main: ./cmd/llamasec
+    id: "llamasec"
+    binary: llamasec
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w
+      - -X github.com/yourusername/llamasec/internal/version.Version={{.Version}}
+      - -X github.com/yourusername/llamasec/internal/version.Commit={{.Commit}}
+      - -X github.com/yourusername/llamasec/internal/version.BuildDate={{.Date}}
+
+archives:
+  - id: llamasec
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - LICENSE
+      - README.md
+      - config/signatures.yaml
+      - config/config.yaml
+      - examples/**/*
+
+checksum:
+  name_template: "{{ .ProjectName }}_checksums.txt"
+  algorithm: sha256
+
+snapshot:
+  name_template: "{{ .Tag }}-SNAPSHOT-{{ .ShortCommit }}"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - Merge pull request
+      - Merge branch
+
+dockers:
+  - image_templates:
+      - "yourusername/llamasec:{{ .Version }}"
+      - "yourusername/llamasec:{{ .Major }}.{{ .Minor }}"
+      - "yourusername/llamasec:latest"
+    dockerfile: Dockerfile.goreleaser
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.Commit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+    skip_push: auto
+
+announce:
+  slack:
+    enabled: false
+    message_template: "LlamaSec {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
+
+  discord:
+    enabled: false
+    message_template: "LlamaSec {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
+
+  twitter:
+    enabled: false
+    message_template: "LlamaSec {{ .Tag }} is out! Check it out at {{ .ReleaseURL }}"
+
+release:
+  github:
+    owner: yourusername
+    name: llamasec
+  prerelease: auto
+  draft: false
+  footer: |
+    ## Installation
+    
+    ```
+    go install github.com/yourusername/llamasec@latest
+    ```
+    
+    Or download the appropriate binary for your platform above.
+    
+    ## Docker
+    
+    ```
+    docker pull yourusername/llamasec:{{ .Version }}
+    ``` 

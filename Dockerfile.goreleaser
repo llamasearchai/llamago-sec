@@ -1,0 +1,33 @@
+FROM alpine:3.18
+
+# Install required packages and create user
+RUN apk add --no-cache ca-certificates tzdata && \
+    addgroup -S llamasec && \
+    adduser -S llamasec -G llamasec
+
+# Create directories
+RUN mkdir -p /app/config /app/reports && \
+    chown -R llamasec:llamasec /app
+
+# Copy binary and configuration files
+COPY llamasec /usr/local/bin/llamasec
+COPY config/signatures.yaml /app/config/signatures.yaml
+COPY config/config.yaml /app/config/config.yaml
+
+# Set working directory and switch to non-root user
+WORKDIR /app
+USER llamasec
+
+# Set environment variables
+ENV LLAMASEC_CONFIG=/app/config/config.yaml \
+    LLAMASEC_SIGNATURES=/app/config/signatures.yaml
+
+# Document exposed ports
+EXPOSE 8080
+
+# Create volumes
+VOLUME ["/app/reports"]
+
+# Set entry point and default command
+ENTRYPOINT ["llamasec"]
+CMD ["--help"] 
