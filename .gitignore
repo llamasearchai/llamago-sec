@@ -1,73 +1,133 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.class
+
+# C extensions
 *.so
-*.dylib
-llamasec
 
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# Dependency directories
-vendor/
-
-# IDE and editor specific files
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# OS specific files
-.DS_Store
-Thumbs.db
-
-# Build output directories
-bin/
-dist/
+# Distribution / packaging
+.Python
 build/
-out/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Log files
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
 *.log
-logs/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
-# Environment variables
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# PEP 582; used by PDM, PEP 582 proposal
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
 .env
-.env.local
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Temporary files
-tmp/
-temp/
+# Spyder project settings
+.spyderproject
+.spyproject
 
-# Generated configuration
-*.yaml.generated
+# Rope project settings
+.ropeproject
 
-# Generated reports
-*_report.md
-*_report.json
-*_report.csv
-*.html
-llamasec_*.md
-llamasec_*.json
-llamasec_*.csv
-reports/
+# mkdocs documentation
+/site
 
-# Deployment artifacts
-deploy/artifacts/
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
 
-# Go workspace file
-go.work
+# Pyre type checker
+.pyre/
 
-# Output reports
-*.md
-!README.md
-!CONTRIBUTING.md
-!docs/*.md
-*.json
-*.csv
-*.html 
+# pytype static analysis results
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# VSCode
+.vscode/
+
+# Optional: Other common files
+*.swp
+*~
+.DS_Store
