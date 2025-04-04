@@ -4,14 +4,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="llamago-sec",
+    name="llamago-sec-llamasearch",
     version="0.1.0",
     author="LlamaSearch AI",
-    author_email="info@llamasearchai.com",
+    author_email="nikjois@llamasearch.ai",
     description="A powerful library for AI-powered search and data processing",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/llamasearchai/llamago-sec",
+    url="https://llamasearch.ai",
     project_urls={
         "Bug Tracker": "https://github.com/llamasearchai/llamago-sec/issues",
         "Documentation": "https://llamasearchai.github.io/llamago-sec/",
@@ -62,4 +62,6 @@ setup(
             "llamago-sec=llamago-sec.cli:main",
         ],
     },
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
 )
