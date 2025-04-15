@@ -1,0 +1,29 @@
+# Sample URLs for LlamaSec scanning
+# Lines starting with # are comments and will be ignored
+
+# Major websites
+https://example.com
+https://google.com
+https://github.com
+https://mozilla.org
+
+# Educational institutions
+https://mit.edu
+https://stanford.edu
+https://harvard.edu
+
+# News sites
+https://cnn.com
+https://bbc.com
+https://reuters.com
+
+# Technology companies
+https://microsoft.com
+https://apple.com
+https://amazon.com
+https://netflix.com
+
+# Open source projects
+https://golang.org
+https://python.org
+https://nodejs.org 
